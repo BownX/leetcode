@@ -17,33 +17,33 @@ AC失败，超时了 = =
 */
 char* longestPalindrome_dp(char* s) {
 	int length = strlen(s);
-    bool isPalindrome[length][length];
-    // 定义 isPalindrome，用于记录 s 中位置 i~j 这一段是不是回文的.
-    for (int i = 0; i < length; ++i) {
-    	for (int j = 0; j < length; ++j) {
-    		// 初始化时，i=j(1个字符)和i>j(0个字符)时为true，其他都false
-    		isPalindrome[i][j] = (i >= j);
-    	}
-    }
+	bool isPalindrome[length][length];
+	// 定义 isPalindrome，用于记录 s 中位置 i~j 这一段是不是回文的.
+	for (int i = 0; i < length; ++i) {
+		for (int j = 0; j < length; ++j) {
+			// 初始化时，i=j(1个字符)和i>j(0个字符)时为true，其他都false
+			isPalindrome[i][j] = (i >= j);
+		}
+	}
 
-    int j, k;
-    int max_length = 0;
-    int max_start = 0;
-    // k代表s[i~j]长度，循环从长度为1开始
-    for (int k = 1; k < length; ++k) {
-    	for (int i = 0; k + i < length; ++i) {
-    		j = i + k;
-    		if (s[i] != s[j]) {
-    			isPalindrome[i][j] = false;
-    		} else {
-    			isPalindrome[i][j] = isPalindrome[i+1][j-1];
-    			if (isPalindrome[i][j]) {
-	    			// 记录最大回文串的长度和起点index
-	    			if (k+1 > max_length) {
-	    				max_length = k+1;
-	    				max_start = i;
-	    			}
-	    		}
+	int j, k;
+	int max_length = 0;
+	int max_start = 0;
+	// k代表s[i~j]长度，循环从长度为1开始
+	for (int k = 1; k < length; ++k) {
+		for (int i = 0; k + i < length; ++i) {
+			j = i + k;
+			if (s[i] != s[j]) {
+				isPalindrome[i][j] = false;
+			} else {
+				isPalindrome[i][j] = isPalindrome[i+1][j-1];
+				if (isPalindrome[i][j]) {
+					// 记录最大回文串的长度和起点index
+					if (k+1 > max_length) {
+						max_length = k+1;
+						max_start = i;
+					}
+				}
 			}
 		}
 	}
