@@ -44,21 +44,24 @@ char* longestPalindrome_dp(char* s) {
 	    				max_start = i;
 	    			}
 	    		}
-    		}
-    	}
-    }
-    char* result = malloc(sizeof(char)*(max_length+1));
+			}
+		}
+	}
+	char* result = malloc(sizeof(char)*(max_length+1));
 	memcpy(result, &s[max_start], max_length);
 	result[max_length] = '\0';
-    return result;
+	return result;
 }
 
 /*
+Thanks to: http://articles.leetcode.com/2011/11/longest-palindromic-substring-part-ii.html
 Manacher解法，复杂度: O(n)
+目测此解法也只能用于这个问题了。。
 */
 char* longestPalindrome_manacher(char* s) {
 	int length = strlen(s);
 	int t_length = 2 * length + 3;
+	// 先将原始字符串转换为'#'间隔、'^'开头、'$'结尾的串
 	char temp[2*length+3];
 	temp[0] = '^';
 	for (int i = 1; i < t_length - 2; i+=2) {
@@ -68,11 +71,17 @@ char* longestPalindrome_manacher(char* s) {
 	temp[t_length - 2] = '#';
 	temp[t_length - 1] = '$';
 	
+	// p保存对应index的节点为中心的最大回文串长度
 	int p[t_length];
+	// C为当前回文串中心index，R为当前回文串右边界
 	int C = 0, R = 0;
 	for (int i = 0; i < t_length - 1; ++i) {
+		// i_mirror 对应 i 相对于 C 的对称点
 		int i_mirror = 2 * C - i;
+		// 这里有一个上面文章推导出的结论，若p[i_mirror] <= R-i，则p[i]=p[i_mirror]
+		// 即若 i 在以 C 为中心 R 为半径的回文串内，i 以 C 对称的点 i_mirror 的最大回文串长度 <= R-i
 		p[i] = (R > i) ? (R - i < p[i_mirror] ? R - i : p[i_mirror]) : 0;
+		// 两边延伸 R
 		while(temp[i + 1 + p[i]] == temp[i - 1 - p[i]]) p[i]++;
 		if (i + p[i] > R) {
 			C = i;
@@ -96,7 +105,7 @@ char* longestPalindrome_manacher(char* s) {
 }
 
 int main(int argc, char const *argv[]) {
-	char str[] = "abcba";
+	char str[] = "abccba";
 	printf("%s\n", longestPalindrome_manacher(str));
 	return 0;
 }
