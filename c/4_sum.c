@@ -60,9 +60,9 @@ int** fourSum(int* nums, int numsSize, int target, int* returnSize) {
                     }
                     result[resultSize] = malloc(sizeof(int) * 4);
                     result[resultSize][0] = nums[i];
-    				result[resultSize][1] = nums[j];
-    				result[resultSize][2] = nums[start];
-    				result[resultSize][3] = nums[end];
+                    result[resultSize][1] = nums[j];
+                    result[resultSize][2] = nums[start];
+                    result[resultSize][3] = nums[end];
     				resultSize++;
                     // extend result array.
                     if (resultSize == resultCapacity) {
