@@ -17,12 +17,6 @@ https://leetcode.com/problems/4sum/
 #include "stdio.h"
 #include "stdlib.h"
 
-int fac(int n) {
-	int result = 1;
-	for (int i = 1; i <= n; ++i) result *= i;
-	return result;
-}
-
 static int cmp(const void *a, const void *b) {
 	return *(int *)a - *(int *)b;
 }
