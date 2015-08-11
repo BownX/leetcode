@@ -20,7 +20,7 @@ int reverse(int x) {
 	int MAX = (~(unsigned)0) >> 1;
 	int MIN = -(int)((~(unsigned)0) >> 1) - 1;
 	int result = 0;
-	while(x != 0) {
+	while (x != 0) {
 		// 在值*10之前预先一步判断是否overflow (虽然ac了但是严格来说判断不严谨，后面atoi那题更严谨一些)
 		if ((result > 0 && result > MAX / 10) || (result < 0 && result < MIN / 10)) {
 			// overflow

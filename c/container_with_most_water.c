@@ -18,12 +18,12 @@ int maxArea(int* height, int heightSize) {
 	int i = 0 ;
 	int j = heightSize - 1;
 	int max = 0;
-	while(i < j) {
+	while (i < j) {
 		int h = (height[i] < height[j] ? height[i] : height[j]);
 		int vol = (j - i) * h;
 		max = vol > max ? vol : max;
-		while(height[i] <= h) i++;
-		while(height[j] <= h) j--;
+		while (height[i] <= h) i++;
+		while (height[j] <= h) j--;
 	}
 	return max;
 }

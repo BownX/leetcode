@@ -19,7 +19,7 @@ isMatch("aab", "c*a*b") → true  // 注，这里是匹配 (c*)(a*)b 这个模�
 https://leetcode.com/problems/regular-expression-matching/
 
 Thanks to: https://leetcode.com/discuss/43860/9-lines-16ms-c-dp-solutions-with-explanations
-*/	
+*/
 
 #include "stdio.h"
 #include "stdlib.h"
@@ -39,7 +39,7 @@ bool isMatch(char* s, char* p) {
 	for (int i = 0; i <= len_s; ++i) {
 		for (int j = 1; j <= len_p; ++j) {
 			// 如果 p[j-1] != '*': 若s[0~i-1]和p[0~j-1]匹配，且p[j-1] == '.' 或 p[j-1]==s[i-1]，则有s[0~i]和p[0~j]匹配，即dp[i][j]=dp[i-1][j-1]
-			// 如果 p[j-1] == '*': 
+			// 如果 p[j-1] == '*':
 			// 		1. 无论p[j-2]是什么值都由于后面有一个'*'可以匹配，就有了 dp[i][j] = dp[i][j-2]
 			// 		2. 若s[0~i-1]和p[0~j]匹配，且s[i-1]==p[j-2]，或p[j-2]是'.'，这时既s[0~i-1]和p[0~j-2]匹配且s[0~i-1]和p[0~j]匹配，说明p[j]是'*'或'.'，一定可以匹配s[i]，即 dp[i][j]
 			if (p[j - 1] == '*') {

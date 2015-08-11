@@ -22,7 +22,7 @@ char* intToRoman(int num) {
 	if (num >= 10) current_digits = 1;
 	if (num >= 100) current_digits = 2;
 	if (num >= 1000) current_digits = 3;
-	while(num != 0) {
+	while (num != 0) {
 		int number = num / pow(10, current_digits);
 		if (number == 9) {
 			strcat(result, TENS[current_digits]);
@@ -33,7 +33,7 @@ char* intToRoman(int num) {
 		} else if (number > 0) {
 			strcat(result, TENS[current_digits]);
 			if (number == 4) {
-				strcat(result, FIVES[current_digits]);	
+				strcat(result, FIVES[current_digits]);
 			} else {
 				for (int i = 1; i < (3 < number ? 3 : number); ++i) strcat(result, TENS[current_digits]);
 			}

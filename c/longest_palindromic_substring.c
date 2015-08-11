@@ -9,7 +9,7 @@ https://leetcode.com/problems/longest-palindromic-substring/
 #include "stdbool.h"
 #include "string.h"
 
-/* 
+/*
 最大回文串的动态规划解法，复杂度: 时间空间都是 O(n^2)
 主要思想是：如果s[i+1~j-1]是回文串且s[i]=s[j]，那么s[i][j]也一定是
 
@@ -36,18 +36,18 @@ char* longestPalindrome_dp(char* s) {
 			if (s[i] != s[j]) {
 				isPalindrome[i][j] = false;
 			} else {
-				isPalindrome[i][j] = isPalindrome[i+1][j-1];
+				isPalindrome[i][j] = isPalindrome[i + 1][j - 1];
 				if (isPalindrome[i][j]) {
 					// 记录最大回文串的长度和起点index
-					if (k+1 > max_length) {
-						max_length = k+1;
+					if (k + 1 > max_length) {
+						max_length = k + 1;
 						max_start = i;
 					}
 				}
 			}
 		}
 	}
-	char* result = malloc(sizeof(char)*(max_length+1));
+	char* result = malloc(sizeof(char) * (max_length + 1));
 	memcpy(result, &s[max_start], max_length);
 	result[max_length] = '\0';
 	return result;
@@ -62,15 +62,15 @@ char* longestPalindrome_manacher(char* s) {
 	int length = strlen(s);
 	int t_length = 2 * length + 3;
 	// 先将原始字符串转换为'#'间隔、'^'开头、'$'结尾的串
-	char temp[2*length+3];
+	char temp[2 * length + 3];
 	temp[0] = '^';
-	for (int i = 1; i < t_length - 2; i+=2) {
+	for (int i = 1; i < t_length - 2; i += 2) {
 		temp[i] = '#';
-		temp[i+1] = s[i/2];
+		temp[i + 1] = s[i / 2];
 	}
 	temp[t_length - 2] = '#';
 	temp[t_length - 1] = '$';
-	
+
 	// p保存对应index的节点为中心的最大回文串长度
 	int p[t_length];
 	// C为当前回文串中心index，R为当前回文串右边界
@@ -82,7 +82,7 @@ char* longestPalindrome_manacher(char* s) {
 		// 即若 i 在以 C 为中心 R 为半径的回文串内，i 以 C 对称的点 i_mirror 的最大回文串长度 <= R-i
 		p[i] = (R > i) ? (R - i < p[i_mirror] ? R - i : p[i_mirror]) : 0;
 		// 两边延伸 R
-		while(temp[i + 1 + p[i]] == temp[i - 1 - p[i]]) p[i]++;
+		while (temp[i + 1 + p[i]] == temp[i - 1 - p[i]]) p[i]++;
 		if (i + p[i] > R) {
 			C = i;
 			R = i + p[i];
@@ -98,8 +98,8 @@ char* longestPalindrome_manacher(char* s) {
 		}
 	}
 
-	char* result = malloc(sizeof(char) * (max_length+1));
-	memcpy(result, &s[(center_index - 1 - max_length)/2], max_length);
+	char* result = malloc(sizeof(char) * (max_length + 1));
+	memcpy(result, &s[(center_index - 1 - max_length) / 2], max_length);
 	result[max_length] = '\0';
 	return result;
 }

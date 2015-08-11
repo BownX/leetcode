@@ -24,30 +24,30 @@ int threeSumClosest(int* nums, int numsSize, int target) {
 	if (nums == NULL || numsSize < 3) {
 		return target;
 	}
-    qsort(nums, numsSize, sizeof(int),cmp);
-    int diff = (~(unsigned)0) >> 1; // MAX
-    int min = 0;
-    for (int i = 0; i < numsSize - 2; ++i) {
-    	int start = i + 1;
-    	int end = numsSize - 1;
-    	while (start < end) {
-    		int sum = nums[i] + nums[start] + nums[end];
-	    	if (abs(sum - target) <= diff) {
+	qsort(nums, numsSize, sizeof(int), cmp);
+	int diff = (~(unsigned)0) >> 1; // MAX
+	int min = 0;
+	for (int i = 0; i < numsSize - 2; ++i) {
+		int start = i + 1;
+		int end = numsSize - 1;
+		while (start < end) {
+			int sum = nums[i] + nums[start] + nums[end];
+			if (abs(sum - target) <= diff) {
 				diff = abs(sum - target);
 				min = sum;
-	    	} 
-	    	if (sum > target) {
-	    		end--;
-	    	} else {
-	    		start++;
-	    	}
-    	}
-    }
-    return min;
+			}
+			if (sum > target) {
+				end--;
+			} else {
+				start++;
+			}
+		}
+	}
+	return min;
 }
 
 int main(int argc, char const *argv[]) {
-	int nums[4] = {-1, 2, 1, -4};
+	int nums[4] = { -1, 2, 1, -4};
 	printf("%d\n", threeSumClosest(nums, 4, 1));
 	return 0;
 }

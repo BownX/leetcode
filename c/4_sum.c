@@ -18,37 +18,37 @@ https://leetcode.com/problems/4sum/
 #include "stdlib.h"
 
 static int cmp(const void *a, const void *b) {
-	return *(int *)a - *(int *)b;
+    return *(int *)a - *(int *)b;
 }
 
 /**
- * 解法同 3 sum，只是又多了一层。。 
- * 
+ * 解法同 3 sum，只是又多了一层。。
+ *
  * Return an array of arrays of size *returnSize.
  * Note: The returned array must be malloced, assume caller calls free().
  */
 int** fourSum(int* nums, int numsSize, int target, int* returnSize) {
     if (nums == NULL || numsSize < 4) {
-    	return NULL;
+        return NULL;
     }
     qsort(nums, numsSize, sizeof(int), cmp);
     int resultSize = 0;
     int resultCapacity = numsSize;
     int **result = malloc(sizeof(int *) * resultCapacity);
     for (int i = 0; i < numsSize - 3; ++i) {
-    	for (int j = i + 1; j < numsSize - 2; ++j) {
-    		int start = j + 1;
-    		int end = numsSize - 1;
-    		while (start < end) {
-    			int sum = nums[i] + nums[j] + nums[start] + nums[end];
-    			if (sum == target) {
+        for (int j = i + 1; j < numsSize - 2; ++j) {
+            int start = j + 1;
+            int end = numsSize - 1;
+            while (start < end) {
+                int sum = nums[i] + nums[j] + nums[start] + nums[end];
+                if (sum == target) {
                     // skip duplication
                     int duplicate = 0;
                     for (int k = 0; k < resultSize; ++k) {
                         if (result[k][0] == nums[i] &&
-                            result[k][1] == nums[j] &&
-                            result[k][2] == nums[start] &&
-                            result[k][3] == nums[end]) {
+                                result[k][1] == nums[j] &&
+                                result[k][2] == nums[start] &&
+                                result[k][3] == nums[end]) {
                             duplicate = 1;
                             break;
                         }
@@ -63,32 +63,32 @@ int** fourSum(int* nums, int numsSize, int target, int* returnSize) {
                     result[resultSize][1] = nums[j];
                     result[resultSize][2] = nums[start];
                     result[resultSize][3] = nums[end];
-    				resultSize++;
+                    resultSize++;
                     // extend result array.
                     if (resultSize == resultCapacity) {
                         resultCapacity += resultSize;
                         result = realloc(result, sizeof(int *) * resultCapacity);
                     }
-    				start++;
-    				end--;
-    			} else if (sum < target) {
-    				start++;
-    			} else {
-    				end--;
-    			}
-    		}
-    	}
+                    start++;
+                    end--;
+                } else if (sum < target) {
+                    start++;
+                } else {
+                    end--;
+                }
+            }
+        }
     }
     *returnSize = resultSize;
     return result;
 }
 
 int main(int argc, char const *argv[]) {
-	int nums[] = {-9,4,0,-3,6,3,-3,-9,-7,1,0,-7,-8,7,1};
-	int *size = malloc(sizeof(int));
-	int **result = fourSum(nums, 15, -9, size);
-	for (int i = 0; i < (*size); ++i) {
-		printf("result[%d] = {%d %d %d %d}\n", i, result[i][0], result[i][1], result[i][2], result[i][3]);
-	}
-	return 0;
+    int nums[] = { -9, 4, 0, -3, 6, 3, -3, -9, -7, 1, 0, -7, -8, 7, 1};
+    int *size = malloc(sizeof(int));
+    int **result = fourSum(nums, 15, -9, size);
+    for (int i = 0; i < (*size); ++i) {
+        printf("result[%d] = {%d %d %d %d}\n", i, result[i][0], result[i][1], result[i][2], result[i][3]);
+    }
+    return 0;
 }

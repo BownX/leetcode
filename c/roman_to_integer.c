@@ -11,16 +11,16 @@ https://leetcode.com/problems/roman-to-integer/
 #include "stdlib.h"
 
 int val(char c) {
-	switch(c) {
-		case 'I': return 1;
-		case 'V': return 5;
-		case 'X': return 10;
-		case 'L': return 50;
-		case 'C': return 100;
-		case 'D': return 500;
-		case 'M': return 1000;
-	}
-	return 0;
+    switch (c) {
+    case 'I': return 1;
+    case 'V': return 5;
+    case 'X': return 10;
+    case 'L': return 50;
+    case 'C': return 100;
+    case 'D': return 500;
+    case 'M': return 1000;
+    }
+    return 0;
 }
 
 /*
@@ -32,28 +32,28 @@ int romanToInt(char* s) {
     char pre = ' ';
     char cur = ' ';
     for (int i = length - 1; i >= 0; --i) {
-    	if (s[i] != cur) {
-    		pre = cur;
-    	}
-    	cur = s[i];
-    	if (val(pre) != 0) {
-    		if (val(pre) > val(cur)) {
-    			result -= val(cur);
-    		} else {
-    			result += val(cur);
-    		}
-    	} else {
-    		result += val(s[i]);
-    	}
+        if (s[i] != cur) {
+            pre = cur;
+        }
+        cur = s[i];
+        if (val(pre) != 0) {
+            if (val(pre) > val(cur)) {
+                result -= val(cur);
+            } else {
+                result += val(cur);
+            }
+        } else {
+            result += val(s[i]);
+        }
     }
     return result;
 }
 
 int main(int argc, char const *argv[]) {
-	char s[20];
-	while(1) {
-		scanf("%s", s);
-		printf("%d\n", romanToInt(s));		
-	}
-	return 0;
+    char s[20];
+    while (1) {
+        scanf("%s", s);
+        printf("%d\n", romanToInt(s));
+    }
+    return 0;
 }

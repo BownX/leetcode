@@ -37,29 +37,29 @@ S4: b[n/2+1]~b[n]
 #include "stdlib.h"
 
 int findK(int* a, int m, int* b, int n, int k) {
-	if (m <= 0) return b[k-1];
-	if (n <= 0) return a[k-1];
+	if (m <= 0) return b[k - 1];
+	if (n <= 0) return a[k - 1];
 	if (k <= 1) return a[0] < b[0] ? a[0] : b[0];
-	if (b[n/2] >= a[m/2]) {
-		if (m/2 + n/2 + 1 >= k) {
-			return findK(a, m, b, n/2, k);
+	if (b[n / 2] >= a[m / 2]) {
+		if (m / 2 + n / 2 + 1 >= k) {
+			return findK(a, m, b, n / 2, k);
 		} else {
-			return findK(a + m/2 + 1, m - (m/2 + 1), b, n, k - (m/2 + 1));
+			return findK(a + m / 2 + 1, m - (m / 2 + 1), b, n, k - (m / 2 + 1));
 		}
 	} else {
-		if (m/2 + n/2 + 1 >= k) {
-			return findK(a, m/2, b, n, k);
+		if (m / 2 + n / 2 + 1 >= k) {
+			return findK(a, m / 2, b, n, k);
 		} else {
-			return findK(a, m, b + n/2 + 1, n - (n/2 + 1), k - (n/2 + 1));
+			return findK(a, m, b + n / 2 + 1, n - (n / 2 + 1), k - (n / 2 + 1));
 		}
 	}
 }
 
 double findMedianSortedArrays(int* nums1, int nums1Size, int* nums2, int nums2Size) {
 	if ((nums1Size + nums2Size) % 2 == 0) {
-		return (findK(nums1, nums1Size, nums2, nums2Size, (nums1Size + nums2Size)/2) + findK(nums1, nums1Size, nums2, nums2Size, (nums1Size + nums2Size)/2 + 1))/2.0;
+		return (findK(nums1, nums1Size, nums2, nums2Size, (nums1Size + nums2Size) / 2) + findK(nums1, nums1Size, nums2, nums2Size, (nums1Size + nums2Size) / 2 + 1)) / 2.0;
 	} else {
-		return findK(nums1, nums1Size, nums2, nums2Size, (nums1Size + nums2Size)/2 + 1);
+		return findK(nums1, nums1Size, nums2, nums2Size, (nums1Size + nums2Size) / 2 + 1);
 	}
 }
 

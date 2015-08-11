@@ -43,7 +43,7 @@ void insert(Node** table, int size, int key, int value) {
 		table[hash] = node;
 	} else {
 		Node* p = table[hash];
-		while(p->next != NULL) p=p->next;
+		while (p->next != NULL) p = p->next;
 		p->next = node;
 	}
 }
@@ -52,12 +52,12 @@ Node* get(Node** table, int size, int key, int ignoreValue) {
 	int hash = abs(key) % size;
 	Node* p = table[hash];
 	if (p != NULL) {
-		while(p != NULL) {
+		while (p != NULL) {
 			// ignoreValue to solve two-same-key case.
 			if (p->key == key && p->value != ignoreValue) {
 				return p;
 			}
-			p=p->next;
+			p = p->next;
 		}
 	}
 	return NULL;
@@ -88,7 +88,7 @@ int* twoSum(int* nums, int numsSize, int target) {
 
 int main(int argc, char const *argv[]) {
 	// test.
-	int input[] = {2,1,9,4,4,56,90,3};
+	int input[] = {2, 1, 9, 4, 4, 56, 90, 3};
 	int* result = twoSum(input, 8, 8);
 	printf("%d %d\n", result[0], result[1]);
 	return 0;

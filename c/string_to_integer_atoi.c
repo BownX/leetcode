@@ -33,7 +33,7 @@ int myAtoi(char* str) {
 	int symbol = 1;
 	int canIgnore = 0;
 	// skip  space
-	while(str[i] == ' ') i++;
+	while (str[i] == ' ') i++;
 	// check symbol
 	if (str[i] == '+') {
 		i++;
@@ -52,7 +52,7 @@ int myAtoi(char* str) {
 		if (!canIgnore) {
 			int add = (result < 0 ? -1 : 1) * (ch - '0');
 			if (result > MAX / 10 || (result == MAX / 10 && add >= MAX % 10)) {
-				// overflow 
+				// overflow
 				return MAX;
 			}
 			if (result < MIN / 10 || (result == MIN / 10 && add <= MIN % 10)) {

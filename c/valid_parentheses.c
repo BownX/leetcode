@@ -15,30 +15,30 @@ bool isValid(char* s) {
 	int length = strlen(s);
 	char* stack = malloc(sizeof(char) * length);
 	int stackIndex = -1;
-    while (s != NULL && *s != '\0') {
-    	switch (*s) {
-    		case '(':
-    		case '[':
-    		case '{':
-    			stackIndex++;
-    			stack[stackIndex] = *s;
-    			break;
-    		case ')':
-				if (stackIndex >= 0 && stack[stackIndex] == '(') stackIndex--;
-				else return false;
-				break;
-			case ']':
-				if (stackIndex >= 0 && stack[stackIndex] == '[') stackIndex--;
-				else return false;
-				break;
-			case '}':
-				if (stackIndex >= 0 && stack[stackIndex] == '{') stackIndex--;
-				else return false;
-				break;
-    	}
-    	s++;
-    }
-    return stackIndex < 0;
+	while (s != NULL && *s != '\0') {
+		switch (*s) {
+		case '(':
+		case '[':
+		case '{':
+			stackIndex++;
+			stack[stackIndex] = *s;
+			break;
+		case ')':
+			if (stackIndex >= 0 && stack[stackIndex] == '(') stackIndex--;
+			else return false;
+			break;
+		case ']':
+			if (stackIndex >= 0 && stack[stackIndex] == '[') stackIndex--;
+			else return false;
+			break;
+		case '}':
+			if (stackIndex >= 0 && stack[stackIndex] == '{') stackIndex--;
+			else return false;
+			break;
+		}
+		s++;
+	}
+	return stackIndex < 0;
 }
 
 int main(int argc, char const *argv[]) {
