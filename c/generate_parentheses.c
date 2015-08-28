@@ -44,15 +44,15 @@ char** generateParenthesis(int n, int* returnSize) {
 	if (n < 1) {
 		return NULL;
 	}
-    int* resultCount = malloc(sizeof(int));
-    int* resultCapacity = malloc(sizeof(int));
-    (*resultCount) = 0;
-    (*resultCapacity) = n;
-    char** result = malloc(sizeof(char*) * (*resultCapacity));
-    char* str = malloc(sizeof(char) * (n * 2 + 1));
-    generate(n, n, 0, str, &result, resultCount, resultCapacity);
-    *returnSize = *resultCount;
-    return result;
+	int* resultCount = malloc(sizeof(int));
+	int* resultCapacity = malloc(sizeof(int));
+	(*resultCount) = 0;
+	(*resultCapacity) = n;
+	char** result = malloc(sizeof(char*) * (*resultCapacity));
+	char* str = malloc(sizeof(char) * (n * 2 + 1));
+	generate(n, n, 0, str, &result, resultCount, resultCapacity);
+	*returnSize = *resultCount;
+	return result;
 }
 
 int main(int argc, char const *argv[]) {
